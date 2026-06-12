@@ -18,13 +18,34 @@ model User{
   username String @unique
   password String
   target String
+  transactionGroup TransactionGroup[]
   createdAt DateTime @default(now())
+}
+
+model TransactionGroup{
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  transactions Transaction[]
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TransactionType{
+  income
+  expense
 }
 
 model Transaction {
   id Int  @id @default(autoincrement())
-  title String
+  transactionGroupId Int
+  group TransactionGroup @relation(fields: [transactionGroupId], references: [id])
+  type TransactionType
+  name String
+  note String
   amount Float
-  type String
-  CreatedAt DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

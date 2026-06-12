@@ -39,6 +39,16 @@ export default async function RootLayout({
         <div className="flex justify-between items-center px-6 py-4 border-b">
 
           <Header title="Pocket Flow" ></Header>
+
+          {(session?.user?.transactionGroup?.length ?? 0) > 0 && (
+            <select>
+              {session?.user.transactionGroup.map((group) => (
+                <option key={group.id} value={group.id}>
+                  {group.name}
+                </option>
+              ))}
+            </select>
+          )}
           {session ? (
             <form action={SignOut}>
               <button className="text-sm text-red-500 hover:text-red-300">logout</button>

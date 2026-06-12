@@ -1,3 +1,4 @@
+import Link from "next/link"
 
 type HeaderProps = {
     title?: string
@@ -6,14 +7,14 @@ type HeaderProps = {
 export default function Header({ title }: HeaderProps) {
     return (
         <header>
-            <nav>
-                <a href="">Home</a>
-                {" | "}
-                <a href="/Card">Card</a>
-                {" | "}
-                <a href="/profile">Profile</a>
-            </nav>
             <h1>{title}</h1>
+            <nav>
+                <Link href="/">Home</Link>
+                {" | "}
+                <Link href="/about">History</Link>
+                {" | "}
+                <Link href="/about">Dashboard</Link>
+            </nav>
         </header>
     )
 }
