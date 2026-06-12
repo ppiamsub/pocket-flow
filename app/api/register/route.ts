@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { prisma } from "../../lib/prisma"
 import bcrypt from "bcrypt"
+import { Prisma } from "@prisma/client"
 
 
 export async function POST(req: Request) {
@@ -16,6 +17,9 @@ export async function POST(req: Request) {
         })
         return NextResponse.json({ success: true })
     } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
+            return NextResponse.json({ error: "username นี้มีคนใช้แล้ว" }, { status: 400 })
+        }
         return NextResponse.json({ error: "invalid" }, { status: 400 })
     }
 }

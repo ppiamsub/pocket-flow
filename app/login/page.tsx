@@ -26,7 +26,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
 
             <form action={Login} className="flex flex-col gap-3">
                 <input name="username" placeholder="Username" className="border rounded-lg px-4 py-2"></input>
-                <input name="password" placeholder="Password" className="border rounded-lg px-4 py-2"></input>
+                <input name="password" type="password" placeholder="Password" className="border rounded-lg px-4 py-2"></input>
                 <button type="submit" className="bg-blue-500 text-white rounded-lg py-2 font-semibold">Login</button>
             </form>
             {params.error && (
@@ -34,7 +34,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
                     username or password invalid.
                 </p>
             )}
-            <a href="/register" className="block text-center py-2"> register? </a>
+            <a href="/register" className="block text-center py-2 text-blue-400 hover:underline"> register? </a>
         </div>
     )
 }
