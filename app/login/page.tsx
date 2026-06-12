@@ -31,7 +31,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
             </form>
             {params.error && (
                 <p className="text-red-500 text-sm text-center mb-4 py-2">
-                    username or password invalid.
+                    {params.error}
                 </p>
             )}
             <a href="/register" className="block text-center py-2 text-blue-400 hover:underline"> register? </a>
