@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { prisma } from "./app/lib/prisma";
 import bcrypt from "bcrypt"
-import { TransactionGroup } from "@prisma/client"
+import { TransactionGroup } from "@prisma/client";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
@@ -35,11 +35,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
+                token.id = user.id
                 token.transactionGroup = user.transactionGroup
             }
             return token
         },
         async session({ session, token }) {
+            session.user.id = token.id as string
             session.user.transactionGroup = token.transactionGroup as TransactionGroup[]
             return session
         }
