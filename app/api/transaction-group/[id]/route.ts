@@ -9,7 +9,7 @@ export async function PUT(req: Request, { params }: { params: { id: number } }) 
 
     const body = await req.json();
     const group = await prisma.transactionGroup.update({
-        where: { id: params.id },
+        where: { id: Number(params.id) },
         data: {
             name: body.name,
             description: body.description
